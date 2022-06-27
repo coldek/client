@@ -1,16 +1,57 @@
-html,
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+::-webkit-scrollbar {
+    @apply w-[10px];
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-gray-300;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 rounded-2xl;
+}
+
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: 'Rubik';
+    @apply bg-gray-300;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.container {
+    @apply bg-gray-200 border-gray-400 border-2;
 }
 
-* {
-  box-sizing: border-box;
+.container .heading {
+    @apply text-3xl border-b-2 border-gray-400 pb-4;
+}
+
+input[type=text],
+input[type=password],
+input[type=email] {
+    @apply pl-[30px] pr-2 py-1 shadow-md outline-none rounded-md w-full border-2 border-gray-400;
+}
+
+fieldset button {
+    @apply bg-green-600 p-2 rounded-xl text-white;
+}
+
+fieldset button:disabled {
+    @apply bg-gray-400 text-gray-300;
+}
+
+hr {
+    @apply border-y-[1px] border-gray-400;
+}
+
+fieldset label {
+    @apply block mt-2 font-bold;
+}
+
+i.input {
+    @apply relative inline-block text-gray-400 right-[97.6%] w-0 h-0;
 }
