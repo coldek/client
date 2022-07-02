@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             />
             <Header />
             <SideBar />
-            <main className="ml-60 md:px-20 pt-16">
+            <main className="ml-20 md:ml-60 md:px-20 pt-16">
                 {children}
             </main>
         </>

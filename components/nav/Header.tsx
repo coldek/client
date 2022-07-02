@@ -24,6 +24,7 @@ export default function Header() {
                     {isLoggedIn ?
                         <>
                             <img src={`${imageServer}/avatars/headshots/${user?.avatar.cache}.png`} className="rounded-full" width={50} height={50} />
+                            <div className="text-white mt-[1rem]">{user?.username}</div>
                         </>
                         :
                         <>
