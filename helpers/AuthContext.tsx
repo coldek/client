@@ -2,7 +2,9 @@ import { createContext, ReactNode, useContext, useEffect, useState } from "react
 import { User } from "../pages/api/auth/user"
 import Cookies from "js-cookie"
 import { getData } from './getData'
-
+import { GetServerSidePropsContext } from "next"
+import jwt, { Secret } from 'jsonwebtoken'
+import { jwtPub } from "./config";
 
 type AuthContextType = {
     isLoggedIn: boolean
@@ -106,6 +108,16 @@ export function AuthProvider({ children }: Props) {
 
 
 
+}
+
+export function getSession(context: GetServerSidePropsContext<any, any>) {
+    try {
+        const token = jwt.verify(context.req.cookies?.token || "", jwtPub, { algorithms: ["RS256"] })
+        
+        return token
+    } catch (e) {
+        return false
+    }
 }
 
 export function useAuth() {

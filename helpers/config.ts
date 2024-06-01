@@ -1,9 +1,10 @@
 const dev = process.env.NODE_ENV !== 'production'
+// const dev = true
 
-export const server = dev ? `http://localhost:8000` : process.env.API_SERVER
+export const server = dev ? `http://localhost:8000` : process.env.NEXT_PUBLIC_API_SERVER
 
 // /avatars/headshots/[cache].png /avatars/body/[cache].png
-export const imageServer = dev ? `http://localhost:8000/images` : process.env.IMAGE_SERVER
+export const imageServer = dev ? `http://localhost:8000/images` : process.env.NEXT_PUBLIC_IMAGE_SERVER
 
 export const jwtPub = `-----BEGIN PUBLIC KEY-----
 MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA4eJzG5QY3ia4rZh7PeeD

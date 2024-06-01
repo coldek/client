@@ -1,19 +1,21 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useAuth } from "../../helpers/AuthContext"
 
 export default function SideBar({ }) {
     const { isLoggedIn, user, logout } = useAuth()
     const router = useRouter()
 
-    const [expanded, setExpanded] = useState(false)
+    const [expanded, setExpanded] = useState(true)
+
+    useEffect(() => {
+        window.addEventListener("resize", () => setExpanded(window.innerWidth > 1024))
+    })
 
     const PageLink = (props: { href: string, name: string, icon?: string }) => (
-        <Link href={props.href}>
-            <a className="block no-underline px-4 py-2 m-2 hover:bg-gray-400 rounded-3xl">
-                <span className="inline">{props?.icon && <i className={`${props.icon} mr-2`}></i>} {expanded && props.name}</span>
-            </a>
+        <Link href={props.href} className="block no-underline px-4 py-2 m-2 hover:bg-gray-400 rounded-3xl">
+            <span className="inline">{props?.icon && <i className={`${props.icon} mr-2`}></i>} {expanded && props.name}</span>
         </Link>
     )
 
@@ -21,10 +23,11 @@ export default function SideBar({ }) {
         <div className="fixed top-16 bg-[#c0cfd7] z-20 shadow-xl h-screen" style={{
             width: expanded ? '240px' : '65px'
         }}>
-            <button className="block no-underline px-4 py-2 m-2 hover:bg-gray-400 rounded-3xl" onClick={() => setExpanded(!expanded)}>
+            <button className="block no-underline px-4 py-2 m-2 hover:bg-gray-400 rounded-3xl lg:hidden" onClick={() => setExpanded(!expanded)}>
                 <span><i className="fa-solid fa-bars"></i></span>
             </button>
             <PageLink href="/" name={isLoggedIn ? 'Dashboard' : 'Home'} icon="fa-solid fa-house" />
+            <PageLink href="/forum" name="Forums" icon="fa-solid fa-comment" />
             <PageLink href="/community" name="Communities" icon="fa-solid fa-bullhorn" />
             <PageLink href="/market" name="Market" icon="fa-solid fa-store" />
             <PageLink href="/users" name="Users" icon="fa-solid fa-users" />

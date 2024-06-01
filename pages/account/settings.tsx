@@ -1,6 +1,6 @@
 import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
-import { useAuth } from "../../helpers/AuthContext";
+import { getSession, useAuth } from "../../helpers/AuthContext";
 import * as cookie from 'cookie'
 import jwt, { Secret } from 'jsonwebtoken'
 import { jwtPub } from "../../helpers/config";
@@ -14,11 +14,19 @@ const SettingsPage: NextPage = () => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    try {
-        const token = jwt.verify(context.req.cookies?.token, jwtPub, { algorithms: ["RS256"] })
-        return { props: {} }
-    } catch (e) {
-        return { notFound: true }
+    const isLoggedIn = getSession(context)
+
+    if(isLoggedIn) {
+        return {
+            props: {}
+        }
+    } else {
+        return {
+            redirect: {
+                destination: '/account/login',
+                permanent: false
+            }
+        }
     }
 }
 

@@ -1,6 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import Cookies from 'js-cookie'
-import { responseSymbol } from 'next/dist/server/web/spec-compliant/fetch-event'
 
 export function getData({ url, method, body, headers = {
     'Content-Type': 'application/json'

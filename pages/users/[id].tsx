@@ -4,15 +4,20 @@ import { server } from "../../helpers/config";
 import { getData } from "../../helpers/getData";
 import { User } from "../api/auth/user";
 import DefaultErrorPage from 'next/error'
+import Image from "next/image";
 
 const UserPage: NextPage<any> = ({ data }) => {
     const router = useRouter()
     if (data?.statusCode) return <DefaultErrorPage statusCode={data.statusCode} />
 
     const user = data.user
-
+    console.log({user})
     return (
         <>
+            <div className="inline-block">
+
+            <Image alt="test" fill src={`${process.env.NEXT_PUBLIC_IMAGE_SERVER}/avatars/body/${user.avatar.cache}.png`} />
+            </div>
             test {user.id}
         </>
     )
